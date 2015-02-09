@@ -11,28 +11,24 @@
             </div>
             
             <div id="navbar" class="navbar-collapse collapse">
+                @if(Session["key"]!=null){
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Application Management<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("User Management","Index","UsersAdmin")</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("User Role Management","Index","RolesAdmin")</li>
-                            <li class="divider"></li>
                             <li>@Html.ActionLink("School Management","Index","School")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Branch Management","Index","Branch")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Class Level Management","Index","ClassLevel")</li>
                         </ul>
                     </li>
                 </ul>
-                @if (Session.Keys.Count==3) {
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">School Management<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Branch Management","Index","Branch")</li>
-                            <li class="divider"></li>
                             <li>@Html.ActionLink("Subject Management","Index","Subject")</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Class Level Management","Index","ClassLevel")</li>
                             <li class="divider"></li>
                             <li>@Html.ActionLink("Student Management","Index","Student")</li>
                             <li class="divider"></li>
@@ -62,15 +58,17 @@
                         </ul>
                     </li>
                 </ul>
+                
                 @*   <ul class="nav navbar-nav navbar-right">
                     <li><a href="../navbar/">Default</a></li>
                     <li><a href="../navbar-static-top/">Static top</a></li>
                     <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
                 </ul>*@
-                }
                 
+                }
                 @Html.Partial("_LoginPartial")
             </div>
+            
             <!--/.nav-collapse -->
         </div>
     </div>

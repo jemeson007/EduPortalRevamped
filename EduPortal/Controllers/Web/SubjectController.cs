@@ -43,7 +43,12 @@ namespace EduPortal.Controllers.Web
         // GET: /Subject/Create
         public ActionResult Create()
         {
-            return View();
+            if(isAuthenticated())
+            {
+                ViewBag.ClassLevel = JsonConvert.DeserializeObject<List<ClassLevel>>(Client<ClassLevel>.GetAll(RetrieveKeys("classlevel")));
+                return View();
+            }
+            return RedirectToLogin();
         }
 
         //
@@ -62,8 +67,12 @@ namespace EduPortal.Controllers.Web
         // GET: /Subject/Edit/5
         public ActionResult Edit(int id)
         {
-            var subject = JsonConvert.DeserializeObject<Subject>(Client<Subject>.Get(id, RetrieveKeys(_resourceName)));
-            return View(subject);
+            if(isAuthenticated())
+            {
+                var subject = JsonConvert.DeserializeObject<Subject>(Client<Subject>.Get(id, RetrieveKeys(_resourceName)));
+                return View(subject);
+            }
+            return RedirectToLogin();
         }
 
         //
@@ -71,11 +80,15 @@ namespace EduPortal.Controllers.Web
         [HttpPost]
         public ActionResult Edit(Subject subject)
         {
-            if (Client<Subject>.Update(subject, RetrieveKeys(_resourceName)))
+            if (isAuthenticated())
             {
-                return RedirectToAction("Index");
+                if (Client<Subject>.Update(subject, RetrieveKeys(_resourceName)))
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(subject);
             }
-            return View(subject);
+            return RedirectToLogin();
                   
         }
 
@@ -83,13 +96,17 @@ namespace EduPortal.Controllers.Web
         // GET: /Subject/Delete/5
         public ActionResult EnableorDisable(int id,string key)
         {
-            var subject = JsonConvert.DeserializeObject<Subject>(Client<Subject>.Get(id, RetrieveKeys(_resourceName)));
-            subject.IsActive = !subject.IsActive;
-            if(Client<Subject>.Update(subject, RetrieveKeys(_resourceName)))
+            if (isAuthenticated())
             {
-                return Redirect(Request.UrlReferrer.ToString());
+                var subject = JsonConvert.DeserializeObject<Subject>(Client<Subject>.Get(id, RetrieveKeys(_resourceName)));
+                subject.IsActive = !subject.IsActive;
+                if (Client<Subject>.Update(subject, RetrieveKeys(_resourceName)))
+                {
+                    return Redirect(Request.UrlReferrer.ToString());
+                }
+                return View();
             }
-            return View();
+            return RedirectToLogin();
         }
     }
 }

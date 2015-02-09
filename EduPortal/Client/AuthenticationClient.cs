@@ -42,12 +42,12 @@ namespace EduPortal.Client
                 return keys;
             }
         }
-        public static bool Logout()
+        public static bool Logout(string auth_key)
         {
             using(var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseAddress);
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", auth);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",auth_key);
                 var result = client.PostAsync("api/Account/logout",null).Result;
                 return result.IsSuccessStatusCode;
             }

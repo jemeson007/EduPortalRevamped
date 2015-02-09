@@ -50,7 +50,7 @@ namespace EduPortal.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public School School { get; set; }
+        public string School { get; set; }
     }
 
     public class RegisterExternalBindingModel

@@ -13,7 +13,7 @@ namespace EduPortal.Client
     {
         public static string _baseAddress = ConfigurationManager.AppSettings["Api"];
 
-        static string auth = ConfigurationManager.AppSettings["Authorization"];
+        //static string auth = ConfigurationManager.AppSettings["Authorization"];
 
         public static bool Create(Base item,IDictionary<string,string> input)
         {
@@ -21,7 +21,7 @@ namespace EduPortal.Client
             { // TODO: Add insert logic here
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", auth);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", input["accesskey"]);
                 client.BaseAddress = new Uri(_baseAddress);
                 
                 var result = client.PostAsync("api/" + input["resource"]+"?key="+input["key"], item, new JsonMediaTypeFormatter()).Result;

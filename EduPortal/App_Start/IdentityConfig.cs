@@ -6,6 +6,7 @@ using Microsoft.Owin;
 using EduPortal.Models;
 using System.Data.Entity;
 using EduPortal.Core.Entity;
+using System.Web;
 
 namespace EduPortal
 {
@@ -16,9 +17,9 @@ namespace EduPortal
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+
         }
 
-        
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
@@ -44,5 +45,33 @@ namespace EduPortal
             }
             return manager;
         }
+
+    }
+
+    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    {
+        protected override void Seed(ApplicationDbContext context)
+        {
+            InitializeIdentityForEF(context);
+            base.Seed(context);
+        }
+
+        //Create User=Admin@Admin.com with password=Admin@123456 in the Admin role        
+        public static void InitializeIdentityForEF(ApplicationDbContext db)
+        {
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            const string name = "phalecs@gmail.com";
+            const string password = "P@ssw0rd";
+
+            var user = userManager.FindByName(name);
+            if (user == null)
+            {
+                user = new ApplicationUser { UserName = name, Email = name, School = "Default" };
+                var result = userManager.Create(user, password);
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+        }
+
     }
 }

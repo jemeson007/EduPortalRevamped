@@ -18,7 +18,7 @@ namespace EduPortal.Controllers.Web
         {
             if(isAuthenticated())
             {
-                List<School> branches = JsonConvert.DeserializeObject<List<School>>(SchoolClient.GetAll(_resourceName));
+                List<School> branches = JsonConvert.DeserializeObject<List<School>>(SchoolClient.GetAll(RetrieveKeys(_resourceName)));
                 return View(branches);
             }
             return RedirectToLogin();
@@ -29,7 +29,7 @@ namespace EduPortal.Controllers.Web
         {
             if (isAuthenticated())
             {
-                var school = JsonConvert.DeserializeObject<School>(SchoolClient.Get(id, _resourceName));
+                var school = JsonConvert.DeserializeObject<School>(SchoolClient.Get(id, RetrieveKeys(_resourceName)));
                 return View(school);
             }
             return RedirectToLogin();
@@ -53,7 +53,7 @@ namespace EduPortal.Controllers.Web
             if (isAuthenticated())
             {
                 string pword = "P@ssw0rd";
-                RegisterBindingModel user = new RegisterBindingModel() { School = school, Email = school.AdminEmail, Password = pword, ConfirmPassword = pword };
+                RegisterBindingModel user = new RegisterBindingModel() { School = school.Name, Email = school.AdminEmail, Password = pword, ConfirmPassword = pword };
                 var userResult = AuthenticationClient.Register(user);
                 if (userResult)
                 {
@@ -69,7 +69,7 @@ namespace EduPortal.Controllers.Web
         {
             if (isAuthenticated())
             {
-                var school = JsonConvert.DeserializeObject<School>(SchoolClient.Get(id, _resourceName));
+                var school = JsonConvert.DeserializeObject<School>(SchoolClient.Get(id, RetrieveKeys(_resourceName)));
                 return View(school);
             }
             return RedirectToLogin();
@@ -81,7 +81,7 @@ namespace EduPortal.Controllers.Web
         {
             if (isAuthenticated())
             {
-                var result = SchoolClient.Update(school, _resourceName);
+                var result = SchoolClient.Update(school, RetrieveKeys(_resourceName));
                 if (result)
                 {
                     return RedirectToAction("Index");
@@ -95,9 +95,9 @@ namespace EduPortal.Controllers.Web
         {
             if (isAuthenticated())
             {
-                School result = JsonConvert.DeserializeObject<School>(SchoolClient.Get(id, _resourceName));
+                School result = JsonConvert.DeserializeObject<School>(SchoolClient.Get(id, RetrieveKeys(_resourceName)));
                 result.IsActive = !result.IsActive;
-                SchoolClient.Update(result, _resourceName);
+                SchoolClient.Update(result, RetrieveKeys(_resourceName));
                 return Redirect(Request.UrlReferrer.ToString());
             }
             return RedirectToLogin();

@@ -1,17 +1,6 @@
 ﻿@using EduPortal.Core.Entity
 @model ClassLevel
 
-@{
-    List<SelectListItem> branchlist= new List<SelectListItem>();
-   foreach(SchoolBranch item in ViewBag.Branch as List<SchoolBranch>)
-   {
-       branchlist.Add(new SelectListItem
-        {
-            Text = item.Name,
-            Value = item.ID.ToString(),
-        });
-   }
-}
 
 @using (Html.BeginForm()) 
 {

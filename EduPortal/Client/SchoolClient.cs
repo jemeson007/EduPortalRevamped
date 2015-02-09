@@ -52,48 +52,48 @@ namespace EduPortal.Client
         
               
         
-        static string auth = ConfigurationManager.AppSettings["Authorization"];
+        //static string auth = ConfigurationManager.AppSettings["Authorization"];
         public static string _baseAddress = ConfigurationManager.AppSettings["Api"];
-        public static string GetAll(string resourceName)
+        public static string GetAll(IDictionary<string,string> input)
         {
                     
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",auth);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", input["accesskey"]);
                 client.BaseAddress = new Uri(_baseAddress);
-                string result = client.GetStringAsync("api/" + resourceName).Result.ToString();
+                string result = client.GetStringAsync("api/" + input["resource"]).Result.ToString();
                 return result;
             }
         }
-        public static string Get(long id, string resourceName)
+        public static string Get(long id, IDictionary<String,String> input)
         {
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", auth);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", input["accesskey"]);
                 client.BaseAddress = new Uri(_baseAddress);
-                string result = client.GetStringAsync("api/" + resourceName + "/" + id).Result.ToString();
+                string result = client.GetStringAsync("api/" + input["resource"] + "/" + id).Result.ToString();
                 return result;
             }
         }
-        public static bool Create(School item, string resourceName)
+        public static bool Create(School item, IDictionary<String,String> input)
         {
             // TODO: Add insert logic here
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", auth);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", input["accesskey"]);
                 client.BaseAddress = new Uri(_baseAddress);
-                var result = client.PostAsync("api/" + resourceName , item, new JsonMediaTypeFormatter()).Result;
+                var result = client.PostAsync("api/" + input["resource"] , item, new JsonMediaTypeFormatter()).Result;
                 return result.IsSuccessStatusCode;
             }
         }
 
-        public static bool Update(Base item, string resourceName)
+        public static bool Update(Base item, IDictionary<String,String> input)
         {
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", auth);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", input["accesskey"]);
                 client.BaseAddress = new Uri(_baseAddress);
-                var result = client.PutAsync("api/" + resourceName, item, new JsonMediaTypeFormatter()).Result;
+                var result = client.PutAsync("api/" + input["resource"], item, new JsonMediaTypeFormatter()).Result;
                 return result.IsSuccessStatusCode;
             }
         }

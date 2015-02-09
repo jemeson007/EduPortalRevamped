@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace EduPortal.Controllers.API
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()

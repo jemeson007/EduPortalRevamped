@@ -264,7 +264,7 @@ namespace EduPortal.Controllers.API
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName,user.School.Name);
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName,user.School);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
@@ -336,7 +336,6 @@ namespace EduPortal.Controllers.API
             {
                 return GetErrorResult(result);
             }
-
             return Ok();
         }
 

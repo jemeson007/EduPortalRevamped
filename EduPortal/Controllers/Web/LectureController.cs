@@ -15,25 +15,37 @@ namespace EduPortal.Controllers.Web
         
         //
         // GET: /Lecture/
-        public ActionResult Index(string key)
+        public ActionResult Index()
         {
-            var lectures = JsonConvert.DeserializeObject<List<Lecture>>(Client<Lecture>.GetAll(RetrieveKeys(_resourceName)));
-            return View(lectures);
+            if (isAuthenticated())
+            {
+                var lectures = JsonConvert.DeserializeObject<List<Lecture>>(Client<Lecture>.GetAll(RetrieveKeys(_resourceName)));
+                return View(lectures);
+            }
+            return RedirectToLogin();
         }
 
         //
         // GET: /Lecture/Details/5
-        public ActionResult Details(int id,string key)
+        public ActionResult Details(int id)
         {
-            var lecture = JsonConvert.DeserializeObject<Lecture>(Client<Lecture>.Get(id, RetrieveKeys(_resourceName)));
-            return View(lecture);
+            if (isAuthenticated())
+            {
+                var lecture = JsonConvert.DeserializeObject<Lecture>(Client<Lecture>.Get(id, RetrieveKeys(_resourceName)));
+                return View(lecture);
+            }
+            return RedirectToLogin();
         }
 
         //
         // GET: /Lecture/Create
         public ActionResult Create()
         {
-            return View();
+            if (isAuthenticated())
+            {
+                return View();
+            }
+            return RedirectToLogin();
         }
 
         //
@@ -41,23 +53,27 @@ namespace EduPortal.Controllers.Web
         [HttpPost]
         public ActionResult Create(Lecture lecture)
         {
-           
-            if (Client<Lecture>.Create(lecture,RetrieveKeys(_resourceName)))
-            {
-                return RedirectToAction("Create", "LectureNote");
+           if(isAuthenticated())
+           {
+                if (Client<Lecture>.Create(lecture,RetrieveKeys(_resourceName)))
+                {
+                    return RedirectToAction("Create", "LectureNote");
+                }
+               return View();
             }
-            else
-            {
-                return View();
-            }
+           return RedirectToLogin();
         }
 
         //
         // GET: /Lecture/Edit/5
         public ActionResult Edit(int id)
         {
-            var lecture = JsonConvert.DeserializeObject<Lecture>(Client<Lecture>.Get(id, RetrieveKeys(_resourceName)));
-            return View(lecture);
+            if (isAuthenticated())
+            {
+                var lecture = JsonConvert.DeserializeObject<Lecture>(Client<Lecture>.Get(id, RetrieveKeys(_resourceName)));
+                return View(lecture);
+            }
+            return RedirectToLogin();
         }
 
         //
@@ -65,14 +81,15 @@ namespace EduPortal.Controllers.Web
         [HttpPost]
         public ActionResult Edit(Lecture lecture)
         {
-            if (Client<Lecture>.Update(lecture,RetrieveKeys(_resourceName)))
+            if (isAuthenticated())
             {
-                return RedirectToAction("Index");
-            }
-            else
-            {
+                if (Client<Lecture>.Update(lecture, RetrieveKeys(_resourceName)))
+                {
+                    return RedirectToAction("Index");
+                }
                 return View();
             }
+            return RedirectToLogin();
         }
 
         //
@@ -89,7 +106,7 @@ namespace EduPortal.Controllers.Web
                 }
                 return View();
             }
-            return RedirectToAction("Login","Authenticate");
+            return RedirectToLogin();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using EduPortal.Core.ViewModels;
-using EduPortal.Models;
+﻿using EduPortal.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
+using EduPortal.Core.ViewModels;
 
 namespace EduPortal.Client
 {

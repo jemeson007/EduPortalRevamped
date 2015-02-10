@@ -133,15 +133,7 @@
     <Compile Include="Entity\SchoolBranch.cs" />
     <Compile Include="Entity\Student.cs" />
     <Compile Include="Entity\Subject.cs" />
-    <Compile Include="ViewModels\AccountViewModels.cs" />
-    <Compile Include="ViewModels\AssessmentComponentsView.cs" />
-    <Compile Include="ViewModels\EditUserViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\RoleViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ViewModels\UploadScoresView.cs" />
-    <Compile Include="ViewModels\ViewScoresView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

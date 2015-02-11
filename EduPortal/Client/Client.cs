@@ -11,7 +11,7 @@ namespace EduPortal.Client
 {
     public class Client<Base>
     {
-        public static string _baseAddress = ConfigurationManager.AppSettings["Api"];
+        public static string _baseAddress = ConfigurationManager.AppSettings["WebsiteURL"];
 
         //static string auth = ConfigurationManager.AppSettings["Authorization"];
 

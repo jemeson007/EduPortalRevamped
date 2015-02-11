@@ -53,7 +53,7 @@ namespace EduPortal.Client
               
         
         //static string auth = ConfigurationManager.AppSettings["Authorization"];
-        public static string _baseAddress = ConfigurationManager.AppSettings["Api"];
+        public static string _baseAddress = ConfigurationManager.AppSettings["WebsiteURL"];
         public static string GetAll(IDictionary<string,string> input)
         {
                     

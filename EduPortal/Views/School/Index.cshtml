@@ -4,11 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h4>School Report</h4>
 <table class="table">
     <tr>
         <th>
@@ -19,9 +15,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SchoolType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateOfCreation)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
@@ -39,9 +32,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SchoolType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfCreation)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsActive)
@@ -62,3 +52,7 @@
 }
 
 </table>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

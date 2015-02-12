@@ -18,23 +18,35 @@ namespace EduPortal.Controllers.Web
         // GET: /Student/
         public ActionResult Index()
         {
-            var students=JsonConvert.DeserializeObject<List<Student>>(Client<Student>.GetAll(RetrieveKeys(_resourceName)));
-            return View(students);
+            if(isAuthenticated())
+            {
+                var students=JsonConvert.DeserializeObject<List<Student>>(Client<Student>.GetAll(RetrieveKeys(_resourceName)));
+                return View(students);
+            }
+            return RedirectToLogin();            
         }
 
         //
         // GET: /Student/Details/5
         public ActionResult Details(int id)
         {
-            var student = Client<Student>.Get(id, RetrieveKeys(_resourceName));
-             return View(student);
+            if (isAuthenticated())
+            {
+                var student = Client<Student>.Get(id, RetrieveKeys(_resourceName));
+                return View(student);
+            }
+            return RedirectToLogin();
         }
 
         //
         // GET: /Student/Create
         public ActionResult Create()
         {
-            return View();
+            if(isAuthenticated())
+            {
+                return View();
+            }
+            return RedirectToLogin();
         }
 
         //
@@ -76,7 +88,7 @@ namespace EduPortal.Controllers.Web
 
         //
         // GET: /Student/Delete/5
-        public ActionResult EnableorDisable(int id,string key)
+        public ActionResult EnableorDisable(int id)
         {
             var student = JsonConvert.DeserializeObject<Student>(Client<Student>.Get(id, RetrieveKeys(_resourceName)));
             student.IsActive = !student.IsActive;

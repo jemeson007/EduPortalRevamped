@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EduPortal.Core.Attributes;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace EduPortal.Core.Entity
 {
@@ -26,10 +27,13 @@ namespace EduPortal.Core.Entity
         [NotMapped]
         public virtual int SubjectId { get; set; }
         [DataMember]
+        [DisplayName("Week Number")]
         public virtual int WeekNumber { get; set; }
         [DataMember]
+        [DisplayName("Lecture Number")]
         public virtual int LectureNumberInWeek { get; set; }
         [DataMember]
+        [DisplayName("Date of Lecture")]
         public virtual DateTime? Date { get; set; }
 
         public virtual string Title { get; set; }

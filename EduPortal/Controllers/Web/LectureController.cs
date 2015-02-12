@@ -43,6 +43,7 @@ namespace EduPortal.Controllers.Web
         {
             if (isAuthenticated())
             {
+                ViewBag.Subject = JsonConvert.DeserializeObject<List<Subject>>(Client<Subject>.GetAll(RetrieveKeys("subject")));
                 return View();
             }
             return RedirectToLogin();

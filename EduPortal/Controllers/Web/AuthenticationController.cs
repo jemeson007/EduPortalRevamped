@@ -28,7 +28,7 @@ namespace EduPortal.Controllers.Web
             var result=AuthenticationClient.Register(item);
             if(result)
             {
-                return RedirectToAction("Index", "Branch");
+                return RedirectToAction("Index", "School");
             }
             return View(item);
         }
@@ -49,7 +49,7 @@ namespace EduPortal.Controllers.Web
                 Session.Add("key", result["key"]);
                 Session.Add("accesskey", result["access_token"]);
                 Session.Add("username",result["userName"]);
-                return RedirectToAction("Index", "Branch");
+                return RedirectToAction("Index", "School");
             }
             return View(item);
         }

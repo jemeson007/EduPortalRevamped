@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -15,6 +16,7 @@ namespace EduPortal.Core.Entity
         [DataMember]
         public virtual string Name { get; set; }
         [DataMember]
+        [DisplayName("Branch")]
         public virtual SchoolBranch SchoolBranch { get; set; }
 
         [NotMapped]

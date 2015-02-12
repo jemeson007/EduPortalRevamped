@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace EduPortal.Core.Entity
 {
@@ -18,10 +19,11 @@ namespace EduPortal.Core.Entity
         public virtual long ID { get; set; }
        // [DataMember]
 
-        public virtual DateTime? DateOfCreation { get; set; }
         /// <summary>
         /// Status of the Respective Entity
         /// </summary>
+        /// 
+        [DisplayName("Is Active")]
         public virtual bool IsActive { get; set; }
     }
 }

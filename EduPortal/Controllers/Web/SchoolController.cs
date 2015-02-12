@@ -55,7 +55,8 @@ namespace EduPortal.Controllers.Web
                 string pword = "P@ssw0rd";
                 RegisterBindingModel user = new RegisterBindingModel() { School = school.Name, Email = school.AdminEmail, Password = pword, ConfirmPassword = pword };
                 var userResult = AuthenticationClient.Register(user);
-                if (userResult)
+                var schoolResult = SchoolClient.Create(school,RetrieveKeys(_resourceName));
+                if (userResult&&schoolResult)
                 {
                     return RedirectToAction("Index");
                 }

@@ -16,7 +16,7 @@ namespace EduPortal.Client
     public class AuthenticationClient
     {
         public static string _baseAddress = ConfigurationManager.AppSettings.GetValues("WebsiteURL")[0];
-        static string auth = ConfigurationManager.AppSettings["Authorization"];
+        //static string auth = ConfigurationManager.AppSettings["Authorization"];
         public static bool Register(RegisterBindingModel item)
         {
             // TODO: Add insert logic here

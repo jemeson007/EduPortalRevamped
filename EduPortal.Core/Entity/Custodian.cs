@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -13,6 +14,7 @@ namespace EduPortal.Core.Entity
         [DataMember]
         public virtual string Lastname { get; set; }
         [DataMember]
+        [DisplayName("Other Names")]
         public virtual string Othernames { get; set; }
         [DataMember]
         public virtual Title Title { get; set; }

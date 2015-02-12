@@ -75,6 +75,7 @@ namespace EduPortal.Controllers.Web
             if (isAuthenticated())
             {
                 ClassLevel result = JsonConvert.DeserializeObject<ClassLevel>(Client<ClassLevel>.Get(id, RetrieveKeys(_resourceName)));
+                ViewBag.Branch = JsonConvert.DeserializeObject<List<SchoolBranch>>(Client<SchoolBranch>.GetAll(RetrieveKeys("schoolbranch")));
                 return View(result);
             }
             return RedirectToLogin();

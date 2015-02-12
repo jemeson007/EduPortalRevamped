@@ -24,9 +24,6 @@
             @Html.DisplayNameFor(model => model.ClassLevel)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateOfCreation)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th></th>
@@ -47,15 +44,19 @@
             @Html.DisplayFor(modelItem => item.ClassLevel)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateOfCreation)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.IsActive)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @if (item.IsActive)
+            {
+                @Html.ActionLink("Disable", "EnableorDisable", new { id = item.ID })
+            }
+            else
+            {
+                @Html.ActionLink("Enable", "EnableorDisable", new { id = item.ID })
+            }
         </td>
     </tr>
 }

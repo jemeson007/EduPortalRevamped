@@ -18,7 +18,7 @@ namespace EduPortal.Core.EF
         public ApplicationDbContext(string db_name)
             : base(db_name)
         {
-            //Database.SetInitializer<ApplicationDbContext>(new MigrateDatabaseToLatestVersion<ApplicationDbContext, System.Data.Entity.ModelConfiguration.Configuration>());
+                        //Database.SetInitializer<ApplicationDbContext>(new MigrateDatabaseToLatestVersion<ApplicationDbContext, System.Data.Entity.ModelConfiguration.Configuration>());
         }
 
         public DbSet<SchoolBranch> SchoolBranches { get; set; }
